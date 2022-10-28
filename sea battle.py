@@ -246,6 +246,7 @@ class ConsoleInterface:
 
     # Метод запрашивающий размеры игрового поля
     def set_size(self):
+        ConsoleInterface.hello_user(self)
         while True:
             try:
                 self.size_field = int(input('Введите размер игрового поля (от 6 до 9):'))
@@ -279,11 +280,11 @@ class ConsoleInterface:
     def show_board(self):
         print('')
         row = [f'{i + 1}' for i in range(self.size_field)]
-        out_cyan(' ' * (self.size_field - 4) * 2 + '↓↓↓ Your field ↓↓↓')
+        out_cyan(' ' * (self.size_field - 3) * 2 + '↓↓↓ Ваше поле ↓↓↓')
         out_cyan(f'  | {" | ".join(row)} |')
         ConsoleInterface.field(self.user.get_field())
         print('===' + '=' * self.size_field * 4)
-        out_cyan(' ' * (self.size_field - 4) * 2 + '↓↓↓ Enemy field ↓↓↓')
+        out_cyan(' ' * (self.size_field - 4) * 2 + '↓↓↓ Поле врага ↓↓↓')
         out_cyan(f'  | {" | ".join(row)} |')
         ConsoleInterface.field(self.user.get_enemy_field())
         print('===' + '=' * self.size_field * 4)
