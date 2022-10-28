@@ -236,6 +236,9 @@ class ConsoleInterface:
         # При инициализации объекта класса создается 2 объекта класса Игровая доска
         self.user = GameBoard(self.size_field)  # Игровое поле игрока
         self.comp = GameBoard(self.size_field)  # Игровое поле компьютера
+        
+    def hello_user(self):
+        print(Добро пожаловать в игру морской бой!)
 
     # Метод запрашивающий размеры игрового поля
     def set_size(self):
@@ -298,13 +301,13 @@ class ConsoleInterface:
                         f' {randint(1, ConsoleInterface.get_size(self))}'.split()
 
             if len(coord) != 2:
-                print('Enter two coordinates!')
+                print('Введите 2 координаты!')
                 continue
 
             x, y = coord
 
             if not (x.isdigit()) or not (y.isdigit()):
-                print('Enter numbers!')
+                print('Введите числа!')
                 continue
 
             x, y = int(x), int(y)
