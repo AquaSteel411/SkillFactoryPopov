@@ -236,15 +236,19 @@ class ConsoleInterface:
         # При инициализации объекта класса создается 2 объекта класса Игровая доска
         self.user = GameBoard(self.size_field)  # Игровое поле игрока
         self.comp = GameBoard(self.size_field)  # Игровое поле компьютера
-        
+    
+    # Приветственное окно
     def hello_user(self):
-        print(Добро пожаловать в игру морской бой!)
+        print('Добро пожаловать в игру "Морской бой"!')
+        print('{:=^38}'.format(' Формат ввода координат: '))
+        print('{:=^38}'.format(' "x" "пробел" "y" '))
+        print('{:=^38}'.format(' Удачной игры '))
 
     # Метод запрашивающий размеры игрового поля
     def set_size(self):
         while True:
             try:
-                self.size_field = int(input('Введите размер поля (от 6 до 9):'))
+                self.size_field = int(input('Введите размер игрового поля (от 6 до 9):'))
             except ValueError:
                 print('Введите 1 число!')
                 continue
