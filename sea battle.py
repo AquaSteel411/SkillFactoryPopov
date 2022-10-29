@@ -197,32 +197,32 @@ class GameBoard:
 
         for xy in unavail_coords:
             x, y = xy
-            GameBoard.append_unavail_cords(self, x, y, 1)
+            self.append_unavail_cords(self, x, y, 1)
 
     # Расстановка всех кораблей на игровом поле (player=1 - игрок, player=2 - компьютер)
     def add_all_ships(self, player=1):
         if player == 1:
             ci.show_board()
             print('Введите координаты трехпалубного корабля:')
-            GameBoard.add_ship(self, Ship(3, player))
+            self.add_ship(Ship(3, player))
         else:
-            GameBoard.add_ship(self, Ship(3, player))
+            self.add_ship(Ship(3, player))
 
         for i in range(2):
             if player == 1:
                 ci.show_board()
                 print(f'Введите координаты {i + 1}-ого двухпалубного корабля:')
-                GameBoard.add_ship(self, Ship(2, player))
+                self.add_ship(Ship(2, player))
             else:
-                GameBoard.add_ship(self, Ship(2, player))
+                self.add_ship(Ship(2, player))
 
         for i in range(4):
             if player == 1:
                 ci.show_board()
                 print(f'Введите координаты {i + 1}-ого однопалубного корабля:')
-                GameBoard.add_ship(self, Ship(1, player))
+                self.add_ship(Ship(1, player))
             else:
-                GameBoard.add_ship(self, Ship(1, player))
+                self.add_ship(Ship(1, player))
 
 
 # ============================ Класс интерфейса =============================
@@ -247,7 +247,7 @@ class ConsoleInterface:
 
     # Метод запрашивающий размеры игрового поля
     def set_size(self):
-        ConsoleInterface.hello_user(self)
+        self.hello_user()
         while True:
             try:
                 self.size_field = int(input('Введите размер игрового поля (от 6 до 9):'))
@@ -283,11 +283,11 @@ class ConsoleInterface:
         row = [f'{i + 1}' for i in range(self.size_field)]
         out_cyan(' ' * (self.size_field - 3) * 2 + '↓↓↓ Ваше поле ↓↓↓')
         out_cyan(f'  | {" | ".join(row)} |')
-        ConsoleInterface.field(self.user.get_field())
+        self.field(self.user.get_field())
         print('===' + '=' * self.size_field * 4)
         out_cyan(' ' * (self.size_field - 4) * 2 + '↓↓↓ Поле врага ↓↓↓')
         out_cyan(f'  | {" | ".join(row)} |')
-        ConsoleInterface.field(self.user.get_enemy_field())
+        self.field(self.user.get_enemy_field())
         print('===' + '=' * self.size_field * 4)
 
     # Метод запроса координат, в случае с пользователем,
