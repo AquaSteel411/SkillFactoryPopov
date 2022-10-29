@@ -211,7 +211,7 @@ class GameBoard:
         for i in range(2):
             if player == 1:
                 ci.show_board()
-                print('Введите координаты двухпалубного корабля:')
+                print(f'Введите координаты {i + 1}-ого двухпалубного корабля:')
                 GameBoard.add_ship(self, Ship(2, player))
             else:
                 GameBoard.add_ship(self, Ship(2, player))
@@ -219,7 +219,7 @@ class GameBoard:
         for i in range(4):
             if player == 1:
                 ci.show_board()
-                print('Введите координаты однопалубного корабля:')
+                print(f'Введите координаты {i + 1}-ого однопалубного корабля:')
                 GameBoard.add_ship(self, Ship(1, player))
             else:
                 GameBoard.add_ship(self, Ship(1, player))
