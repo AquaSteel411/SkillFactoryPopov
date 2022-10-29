@@ -444,20 +444,20 @@ class ConsoleInterface:
     # Метод, который определяет, кто ходит первым
     def turn(self):
         player = randint(1, 2)
-        ConsoleInterface.show_board(self)
+        self.show_board()
         if player == 1:
             print('Вы начинаете!')
-            ConsoleInterface.ask_coord(self, 1)
+            self.ask_coord(1)
         else:
             print('Компьютер ходит первым!')
-            ConsoleInterface.ask_coord(self, 2)
+            self.ask_coord(2)
 
     # Метод запускающий игру
     def run_game(self):
         self.user.add_all_ships(1)
         self.comp.add_all_ships(2)
         print('\n' + ' ' * (self.size_field - 3) * 2 + 'Игра началась!')
-        ConsoleInterface.turn(self)
+        self.turn()
 
 
 # ====== Выполнение программы ======
