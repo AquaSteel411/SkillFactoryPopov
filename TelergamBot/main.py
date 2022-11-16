@@ -43,7 +43,7 @@ def convert(message: telebot.types.Message):
     item2 = telebot.types.KeyboardButton('/value')
     markup.row(item1, item2)
     try:
-        elem = message.text.lower().split(' ')
+        elem = message.text.lower().split()
 
         if len(elem) != 3:
             raise APIException('Неверное количество параметров!')
