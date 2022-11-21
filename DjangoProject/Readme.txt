@@ -7,3 +7,6 @@
 http://127.0.0.1:8000/olala/
 
 http://127.0.0.1:8000/about/ - оформлена Bootstrap-шаблоном со встроенными пользовательскими данными
+
+Login: admin
+Password: admin
