@@ -1,0 +1,87 @@
+Миграции применены, бд очищена.
+Все команды пронумерованы соответствующим пунктам задания
+
+from django.contrib.auth.models import User
+from news.models import *
+
+1) Создать двух пользователей (с помощью метода User.objects.create_user('username')).
+u1 = User.objects.create_user('Dima')
+u2 = User.objects.create_user('Liza')
+
+2) Создать два объекта модели Author, связанные с пользователями.
+a1 = Author.objects.create(user=u1)
+a2 = Author.objects.create(user=u2)
+
+3) Добавить 4 категории в модель Category.
+c1 = Category.objects.create(topic='Sport')
+c2 = Category.objects.create(topic='Games')
+c3 = Category.objects.create(topic='Politics')
+c4 = Category.objects.create(topic='Hockey')
+
+
+4) Добавить 2 статьи и 1 новость.
+article1 = Post.objects.create(type_post='AR', author=a1, header='Первая статья', text='блаблабла')
+article2 = Post.objects.create(type_post='AR', author=a2, header='Вторая статья', text='Повседневная практика показывает, что новая модель организационной деятельности представляет собой интересный эксперимент проверки системы масштабного изменения ряда параметров! Не следует, однако, забывать о том, что рамки и место обучения кадров в значительной степени обуславливает создание новых предложений. Таким образом, постоянный количественный рост и сфера нашей активности способствует повышению актуальности системы обучения кадров, соответствующей насущным потребностям.')
+news1 = Post.objects.create(type_post='NW', author=a1, header='Новость', text='Новости')
+
+5) Присвоить им категории (как минимум в одной статье/новости должно быть не меньше 2 категорий).
+pc1 = PostCategory.objects.create(post=article1, category=c1)
+pc2 = PostCategory.objects.create(post=article2, category=c3)
+pc3 = PostCategory.objects.create(post=news1, category=c2)
+pc4 = PostCategory.objects.create(post=news1, category=c4)
+
+6) Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий).
+com1 = Comment.objects.create(text_comment='Первый комментарий', post=news1, user=u2)
+com2 = Comment.objects.create(text_comment='Второй комментарий', post=article1, user=u1)
+com3 = Comment.objects.create(text_comment='Третий комментарий', post=news1, user=u1)
+com4 = Comment.objects.create(text_comment='Четвертый комментарий', post=article2, user=u2)
+com5 = Comment.objects.create(text_comment='Пятый комментарий', post=article2, user=u1)
+
+7) Применяя функции like() и dislike() к статьям/новостям и комментариям, скорректировать рейтинги этих объектов.
+article1.like()
+article1.like()
+article1.like()
+article1.dislike()
+article2.like()
+article2.like()
+article2.like()
+article2.dislike()
+article2.like()
+article2.like()
+news1.dislike()
+news1.like()
+news1.like()
+news1.like()
+news1.like()
+news1.like()
+news1.like()
+com1.like()
+com1.like()
+com2.like()
+com3.like()
+com3.dislike()
+com3.like()
+com3.like()
+com3.like()
+com4.dislike()
+
+8) Обновить рейтинги пользователей.
+a1.update_rating()
+a2.update_rating()
+
+9) Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+Author.objects.order_by('-rating_user').values('user__username', 'rating_user')[0]
+
+10) Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
+p_best = Post.objects.filter(type_post='AR').order_by('-rating_news')[0]
+Post.objects.filter(type_post='AR').order_by('-rating_news').values(
+    'author__user__username',
+    'time_post',
+    'rating_news',
+    'header')[0]
+p_best.preview()
+
+11) Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+Comment.objects.filter(post=p_best).values('user__username', 'time_com',
+                                           'rating_com', 'text_comment')
+
